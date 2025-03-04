@@ -21,14 +21,34 @@ def is_valid_last_name(last_name):
     else:
         print(f"{last_name} is an Invalid Last Name.")
 
+#function for checking correct enail address 
+def is_valid_email(email):
+    """
+    - Three mandatory parts: local part (abc), domain name (bl), and main domain (co).
+    - Two optional parts: subdomain (xyz) and country code (in).
+    - Precise positions for '@' and '.'.
+    """
+    pattern = r'^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\.[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(\.[a-zA-Z]{2})?$'
+    
+    if re.match(pattern, email):
+        print(f"{email} is a Valid Email Address.")
+    else:
+        print(f"{email} is an Invalid Email Address.")
+
 
 # user input for first namme
 first_name = input("Enter your First Name: ")
 is_valid_first_name(first_name)
 
-#user imput for last name 
+#user input for last name 
 last_name = input("Enter your Last Name: ")
 is_valid_last_name(last_name)
+
+#user input for email address
+email = input("Enter an email address: ")
+is_valid_email(email)
+
+
 
 
 
