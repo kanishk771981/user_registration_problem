@@ -54,13 +54,14 @@ def is_valid_password(password):
     """
     - Minimum 8 characters.
     - At least 1 uppercase letter.
+    - At least 1 numeric digit.
     """
-    pattern = r'^(?=.*[A-Z]).{8,}$'  # Ensures at least 8 characters and 1 uppercase letter
+    pattern = r'^(?=.*[A-Z])(?=.*\d).{8,}$'  # Ensures at least 8 chars, 1 uppercase, and 1 digit
 
     if re.match(pattern, password):
         print(f"{password} is a Valid Password.")
     else:
-        print(f"{password} is an Invalid Password. It must have at least 8 characters and 1 uppercase letter.")
+        print(f"{password} is an Invalid Password. It must have at least 8 characters, 1 uppercase letter, and 1 numeric digit.")
     
 
 
