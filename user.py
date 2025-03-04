@@ -35,6 +35,20 @@ def is_valid_email(email):
     else:
         print(f"{email} is an Invalid Email Address.")
 
+#function to check correct mobile number format
+def is_valid_mobile(mobile):
+    """
+    - Starts with a 2-digit country code.
+    - Followed by a space.
+    - Followed by a 10-digit number.
+    """
+    pattern = r'^[0-9]{2} [0-9]{10}$'
+    
+    if re.match(pattern, mobile):
+        print(f"{mobile} is a Valid Mobile Number.")
+    else:
+        print(f"{mobile} is an Invalid Mobile Number.")
+
 
 # user input for first namme
 first_name = input("Enter your First Name: ")
@@ -47,6 +61,12 @@ is_valid_last_name(last_name)
 #user input for email address
 email = input("Enter an email address: ")
 is_valid_email(email)
+
+#user input for mobile number
+mobile = input("Enter ypur mobile number:")
+is_valid_mobile(mobile)
+
+
 
 
 
