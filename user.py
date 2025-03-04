@@ -52,15 +52,16 @@ def is_valid_mobile(mobile):
 #function for checking rule for the password
 def is_valid_password(password):
     """
-    Validates if the password meets the rule:
     - Minimum 8 characters.
+    - At least 1 uppercase letter.
     """
-    pattern = r'^.{8,}$'  # Ensures at least 8 characters
+    pattern = r'^(?=.*[A-Z]).{8,}$'  # Ensures at least 8 characters and 1 uppercase letter
 
     if re.match(pattern, password):
         print(f"{password} is a Valid Password.")
     else:
-        print(f"{password} is an Invalid Password. It must have at least 8 characters.")
+        print(f"{password} is an Invalid Password. It must have at least 8 characters and 1 uppercase letter.")
+    
 
 
 # user input for first namme
