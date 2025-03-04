@@ -49,6 +49,19 @@ def is_valid_mobile(mobile):
     else:
         print(f"{mobile} is an Invalid Mobile Number.")
 
+#function for checking rule for the password
+def is_valid_password(password):
+    """
+    Validates if the password meets the rule:
+    - Minimum 8 characters.
+    """
+    pattern = r'^.{8,}$'  # Ensures at least 8 characters
+
+    if re.match(pattern, password):
+        print(f"{password} is a Valid Password.")
+    else:
+        print(f"{password} is an Invalid Password. It must have at least 8 characters.")
+
 
 # user input for first namme
 first_name = input("Enter your First Name: ")
@@ -66,6 +79,9 @@ is_valid_email(email)
 mobile = input("Enter ypur mobile number:")
 is_valid_mobile(mobile)
 
+#user input for password
+password = input("enter your password")
+is_valid_password(password)
 
 
 
