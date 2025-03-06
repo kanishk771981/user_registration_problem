@@ -2,16 +2,22 @@ import re
 
 def is_valid_first_name(name):
     """
-    Validates if the first name starts with a capital letter and has a minimum of 3 characters.
+    Validates if the first name:
+    - Starts with a capital letter
+    - Has a minimum of 3 characters
+    - Contains exactly 1 special character
     """
-    pattern = r'^[A-Z][a-zA-Z]{2,}$'
-    
-    if re.match(pattern, name):
+    pattern = r'^[A-Z][a-zA-Z]{1,}[^\w\s][a-zA-Z]*$'  # Ensures one special character at any position
+
+    special_char_pattern = r'[^\w\s]'  # Finds special characters (excluding letters and digits)
+    special_chars = re.findall(special_char_pattern, name)
+
+    if re.match(pattern, name) and len(special_chars) == 1:
         print(f"{name} is a Valid First Name.")
     else:
-        print(f"{name} is an Invalid First Name.")
+        print(f"{name} is an Invalid First Name. It must start with a capital letter, have at least 3 characters, and contain exactly 1 special character.")
 
-#function for checking the last name
+# Function for checking the last name
 def is_valid_last_name(last_name):
     """Validates if the last name starts with a capital letter and has a minimum of 3 characters."""
     pattern = r'^[A-Z][a-zA-Z]{2,}$'
@@ -21,7 +27,7 @@ def is_valid_last_name(last_name):
     else:
         print(f"{last_name} is an Invalid Last Name.")
 
-#function for checking correct enail address 
+# Function for checking correct email address
 def is_valid_email(email):
     """
     - Three mandatory parts: local part (abc), domain name (bl), and main domain (co).
@@ -35,7 +41,7 @@ def is_valid_email(email):
     else:
         print(f"{email} is an Invalid Email Address.")
 
-#function to check correct mobile number format
+# Function to check correct mobile number format
 def is_valid_mobile(mobile):
     """
     - Starts with a 2-digit country code.
@@ -49,40 +55,42 @@ def is_valid_mobile(mobile):
     else:
         print(f"{mobile} is an Invalid Mobile Number.")
 
-#function for checking rule for the password
+# Function for checking password rules
 def is_valid_password(password):
     """
     - Minimum 8 characters.
     - At least 1 uppercase letter.
     - At least 1 numeric digit.
+    - Exactly 1 special character.
     """
     pattern = r'^(?=.*[A-Z])(?=.*\d).{8,}$'  # Ensures at least 8 chars, 1 uppercase, and 1 digit
+    special_char_pattern = r'[^\w\s]'  # Finds special characters
 
-    if re.match(pattern, password):
+    special_chars = re.findall(special_char_pattern, password)
+
+    if re.match(pattern, password) and len(special_chars) == 1:
         print(f"{password} is a Valid Password.")
     else:
-        print(f"{password} is an Invalid Password. It must have at least 8 characters, 1 uppercase letter, and 1 numeric digit.")
-    
+        print(f"{password} is an Invalid Password. It must have at least 8 characters, 1 uppercase letter, 1 numeric digit, and exactly 1 special character.")
 
-
-# user input for first namme
+# User input for first name
 first_name = input("Enter your First Name: ")
 is_valid_first_name(first_name)
 
-#user input for last name 
+# User input for last name
 last_name = input("Enter your Last Name: ")
 is_valid_last_name(last_name)
 
-#user input for email address
+# User input for email address
 email = input("Enter an email address: ")
 is_valid_email(email)
 
-#user input for mobile number
-mobile = input("Enter ypur mobile number:")
+# User input for mobile number
+mobile = input("Enter your mobile number: ")
 is_valid_mobile(mobile)
 
-#user input for password
-password = input("enter your password")
+# User input for password
+password = input("Enter your password: ")
 is_valid_password(password)
 
 
