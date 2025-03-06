@@ -1,61 +1,64 @@
 import re
+import logging
+
+# Configure logging
+logging.basicConfig(
+    filename="validation.log",  # Ensure this path is writable
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 def is_valid_first_name(name):
     """
     Validates if the first name:
     - Starts with a capital letter
     - Has a minimum of 3 characters
-    - Contains exactly 1 special character
+    
     """
-    pattern = r'^[A-Z][a-zA-Z]{1,}[^\w\s][a-zA-Z]*$'  # Ensures one special character at any position
+   
+    pattern = r'^[A-Z][a-zA-Z]{2,}$'
 
-    special_char_pattern = r'[^\w\s]'  # Finds special characters (excluding letters and digits)
-    special_chars = re.findall(special_char_pattern, name)
-
-    if re.match(pattern, name) and len(special_chars) == 1:
+    if re.match(pattern, name):
+        logging.info(f"Valid First Name: {name}")
         print(f"{name} is a Valid First Name.")
     else:
-        print(f"{name} is an Invalid First Name. It must start with a capital letter, have at least 3 characters, and contain exactly 1 special character.")
+        logging.error(f"Invalid First Name: {name}")
+        print(f"{name} is an Invalid First Name.")
 
-# Function for checking the last name
 def is_valid_last_name(last_name):
     """Validates if the last name starts with a capital letter and has a minimum of 3 characters."""
     pattern = r'^[A-Z][a-zA-Z]{2,}$'
-    
+
     if re.match(pattern, last_name):
+        logging.info(f"Valid Last Name: {last_name}")
         print(f"{last_name} is a Valid Last Name.")
     else:
+        logging.error(f"Invalid Last Name: {last_name}")
         print(f"{last_name} is an Invalid Last Name.")
 
-# Function for checking correct email address
 def is_valid_email(email):
-    """
-    - Three mandatory parts: local part (abc), domain name (bl), and main domain (co).
-    - Two optional parts: subdomain (xyz) and country code (in).
-    - Precise positions for '@' and '.'.
-    """
+    """Validates the email format as per defined structure."""
     pattern = r'^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\.[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(\.[a-zA-Z]{2})?$'
-    
+
     if re.match(pattern, email):
+        logging.info(f"Valid Email: {email}")
         print(f"{email} is a Valid Email Address.")
     else:
+        logging.error(f"Invalid Email: {email}")
         print(f"{email} is an Invalid Email Address.")
 
-# Function to check correct mobile number format
 def is_valid_mobile(mobile):
-    """
-    - Starts with a 2-digit country code.
-    - Followed by a space.
-    - Followed by a 10-digit number.
-    """
+    """Validates the mobile number format (Country code + 10-digit number)."""
     pattern = r'^[0-9]{2} [0-9]{10}$'
-    
+
     if re.match(pattern, mobile):
+        logging.info(f"Valid Mobile Number: {mobile}")
         print(f"{mobile} is a Valid Mobile Number.")
     else:
+        logging.error(f"Invalid Mobile Number: {mobile}")
         print(f"{mobile} is an Invalid Mobile Number.")
 
-# Function for checking password rules
 def is_valid_password(password):
     """
     - Minimum 8 characters.
@@ -64,34 +67,32 @@ def is_valid_password(password):
     - Exactly 1 special character.
     """
     pattern = r'^(?=.*[A-Z])(?=.*\d).{8,}$'  # Ensures at least 8 chars, 1 uppercase, and 1 digit
-    special_char_pattern = r'[^\w\s]'  # Finds special characters
-
-    special_chars = re.findall(special_char_pattern, password)
+    special_chars = re.findall(r'[^\w\s]', password)  # Finds special characters
 
     if re.match(pattern, password) and len(special_chars) == 1:
+        logging.info(f"Valid Password: {password}")
         print(f"{password} is a Valid Password.")
     else:
+        logging.error(f"Invalid Password: {password}")
         print(f"{password} is an Invalid Password. It must have at least 8 characters, 1 uppercase letter, 1 numeric digit, and exactly 1 special character.")
 
-# User input for first name
+# User Inputs
 first_name = input("Enter your First Name: ")
 is_valid_first_name(first_name)
 
-# User input for last name
 last_name = input("Enter your Last Name: ")
 is_valid_last_name(last_name)
 
-# User input for email address
-email = input("Enter an email address: ")
+email = input("Enter an Email Address: ")
 is_valid_email(email)
 
-# User input for mobile number
-mobile = input("Enter your mobile number: ")
+mobile = input("Enter your Mobile Number: ")
 is_valid_mobile(mobile)
 
-# User input for password
-password = input("Enter your password: ")
+password = input("Enter your Password: ")
 is_valid_password(password)
+
+
 
 
 
